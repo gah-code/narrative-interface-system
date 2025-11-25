@@ -1,0 +1,11 @@
+/* Global baseline tweaks layered with tokens and layout */
+
+:root {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
