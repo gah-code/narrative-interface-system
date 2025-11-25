@@ -1,5 +1,5 @@
 
-# gharo-ui-prototype
+# my-landing-page-2026
 
 Next : Interface & Narrative Toolkit
 Bucket 1 – Personal Landing
