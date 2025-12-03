@@ -89,6 +89,6 @@ Running log of agent-assisted reviews for `gharo-ui-prototype`.
   - `npm run dev` – inspected `<head>` for title/description/OG tags.
   - `npm run preview` – confirmed build works and OG path resolves.
 
-## Checkpoint
+## Checkpoint –
 
 These checkpoints document the shift from the original my-landing-page-2026 build into the Narrative Interface System: one library of narrative sections, Contentful mappings, and layout patterns that can be reused across multiple surfaces. Each entry notes how the landing page stays stable while the underlying system becomes more modular and multi-surface ready
