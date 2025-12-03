@@ -7,13 +7,7 @@ Next: **Interface & Narrative Toolkit**
 [![Version](https://img.shields.io/badge/version-v0.1.0-blue)](./VERSION)  
 [![Last Commit](https://img.shields.io/github/last-commit/gah-code/my-landing-page-2026)](https://github.com/gah-code/my-landing-page-2026/commits/main)  
 [![Node](https://img.shields.io/badge/node-%E2%89%A520-orange?logo=node.js&logoColor=white)](https://nodejs.org/)  
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR_NETLIFY_SITE_ID/deploy-status)](https://app.netlify.com/sites/YOUR_NETLIFY_SITE_NAME/deploys)
-
-![Lighthouse Performance](https://img.shields.io/badge/Performance-99-brightgreen?logo=lighthouse&logoColor=white)
-![Lighthouse Accessibility](https://img.shields.io/badge/Accessibility-96-brightgreen?logo=lighthouse&logoColor=white)
-![Lighthouse Best Practices](https://img.shields.io/badge/Best%20Practices-100-brightgreen?logo=lighthouse&logoColor=white)
-![Lighthouse SEO](https://img.shields.io/badge/SEO-100-brightgreen?logo=lighthouse&logoColor=white)
-![Lighthouse PWA](https://img.shields.io/badge/PWA-30-lightgrey?logo=lighthouse&logoColor=white)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/80b7e809-3810-4be9-aee4-a5004d9ac7fd/deploy-status)](https://app.netlify.com/projects/my-landing-page-2026/deploys)
 
 > **my-landing-page-2026** is a high-signal personal landing page that treats SEO, narrative, and content modeling as one system.  
 > Built UI-first, CMS-second, with **Contentful** + **Agent-assisted reviews** to keep the landing page sharp.
@@ -366,9 +360,50 @@ Deeper modeling work now lives in **`landing-page-content-models` v2**.
     - Stacked layout on mobile for all modes.
   - Tests:
     - `fetchPersonalLandingPage.test.ts` covers heroStyle defaults, avatar/image asset handling, and fallback behavior.
-  - Next hero-specific checks:
-    - [ ] Flip `heroStyle` + asset combinations in Contentful to visually verify all three modes.
-    - [ ] Run the `agent/checkpoints/cp-hero-visuals.md` checkpoint (with screenshots) for an Agent review of the visual/UX choices.
+
+---
+
+- [x] **Global spacing & layout rhythm**
+  - Define a simple vertical spacing scale in `tokens.css` (e.g. `--space-4`, `--space-6`, `--space-8`, `--space-12`) and use it consistently for:
+    - Section top/bottom padding.
+    - Gaps between headings and body text.
+    - Gaps between cards (projects, timeline items).
+  - In `layout.css`:
+    - Aim for ~3–4rem vertical space between major sections on desktop.
+    - Ensure there is clear separation between hero, experience, skills, projects, learning, and contact.
+
+- [ ] **Typography scale & hierarchy**
+  - In `tokens.css`, define an explicit type scale and stick to it:
+    - `--font-size-h1` (hero title), `--font-size-h2` (section titles), `--font-size-h3` (card/section sub-headings).
+  - Update headings to use this scale:
+    - `h1` → hero name.
+    - `h2` → section headings (`Experience`, `Skills`, `Projects`, `Learning`, `Contact`).
+    - `h3` → project titles, timeline items, skill group titles (if needed).
+  - Check mobile:
+    - Slightly reduce heading sizes where necessary so text doesn’t wrap awkwardly on small screens.
+    - Ensure line-height is comfortable for reading (especially in hero intro and section intros).
+
+- [ ] **Color & contrast polish**
+  - In `tokens.css`:
+    - Verify `--color-muted` remains readable against the background (meets contrast guidelines).
+    - Add/verify a `--color-focus-ring` token and use it for `:focus-visible` outlines.
+  - In `layout.css`:
+    - Make sure focus outlines and hover states are clearly visible on links and buttons (especially in the header and hero CTAs).
+    - Ensure any borders (project cards, timeline items) use `--color-border` or a subtle variant for consistency.
+
+---
+
+- [ ] **Hero mode verification in Contentful**
+  - Flip `heroStyle` + asset combinations in Contentful to visually verify all three modes:
+    - `heroStyle = typographic` with no images.
+    - `heroStyle = avatar` with `avatarImage` set.
+    - `heroStyle = image` with `heroImage` set.
+  - Check each mode on:
+    - Desktop (spacing, alignment, avatar/image size).
+    - Mobile (stacking, readability, tap target spacing).
+  - Once visually confirmed, run the `agent/checkpoints/cp-hero-visuals.md` checkpoint (with screenshots) for an Agent review of the visual/UX choices.
+
+---
 
 - [ ] **Project visuals (lightweight)**
   - Decide how to present 1–2 flagship projects:
@@ -377,15 +412,14 @@ Deeper modeling work now lives in **`landing-page-content-models` v2**.
   - If using thumbnails:
     - Add an optional `thumbnail` field to the `project` content type in `landing-page-content-models` v2.
     - Map it into the UI and render with meaningful `alt` text (e.g. “Screenshot of project dashboard for …”).
-    - Keep layout simple: small image + text, responsive on mobile.
+    - Keep layout simple and responsive: image + text on desktop, stacked on mobile.
 
-- [ ] **Tokens & readability**
+- [ ] **Tokens & readability check**
   - In `tokens.css`:
-    - Verify `--color-muted` is readable on the dark background (meets contrast requirements).
-    - Ensure focus styles (`:focus-visible`) use a clear, high-contrast `--color-focus-ring`.
+    - Reconfirm `--color-text`, `--color-muted`, and body font-size are comfortable for sustained reading.
   - In `layout.css`:
-    - Confirm section spacing on desktop (aim for ~3–4rem vertical space between sections).
-    - Increase line-height slightly on mobile paragraphs (e.g. `1.6–1.8`) for better readability.
+    - Slightly increase line-height on mobile paragraphs (e.g. `1.6–1.8`) for better readability.
+    - Confirm that long sections (Experience, Projects, Learning) don’t feel cramped or overly dense.
 
 ---
 

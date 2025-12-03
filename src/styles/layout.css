@@ -20,8 +20,8 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: radial-gradient(circle at top, #10152c 0, var(--color-bg) 45%);
-  color: var(--color-text);
+  background: radial-gradient(circle at top, #0e2619 0, var(--color-bg) 55%);
+  color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -54,14 +54,9 @@ body {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus-ring);
   outline-offset: 3px;
-}
-
-/* On dark backgrounds, you can also add a light box-shadow for extra pop */
-a:focus-visible,
-button:focus-visible {
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.6);
 }
 
 /* Header */
@@ -71,8 +66,8 @@ button:focus-visible {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(18px);
-  background: linear-gradient(to bottom, rgba(5, 8, 22, 0.95), rgba(5, 8, 22, 0.8), transparent);
-  border-bottom: 1px solid var(--color-border);
+  background: linear-gradient(to bottom, rgba(2, 10, 8, 0.96), rgba(2, 10, 8, 0.88), transparent);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .page-header-inner {
@@ -105,32 +100,46 @@ button:focus-visible {
 }
 
 .page-nav a {
-  color: var(--color-muted);
+  color: var(--color-text-muted);
   text-decoration: none;
 }
 
 .page-nav a:hover {
-  color: var(--color-text);
+  color: var(--color-text-primary);
 }
 
 /* Sections */
 
 .section {
   max-width: 960px;
-  margin: 0 auto;
-  padding: var(--space-12) var(--space-4);
-  /* Avoid header covering anchor destinations */
-  scroll-margin-top: 5rem;
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+  padding-block: var(--space-12); /* 3rem top + bottom */
 }
 
+/* Vertical separation between sections */
 .section + .section {
   border-top: 1px solid rgba(255, 255, 255, 0.03);
+  margin-top: var(--space-4);
+}
+
+.section h2 {
+  margin: 0 0 var(--space-4); /* space between section heading and its content */
+}
+
+.section p {
+  margin: 0 0 var(--space-3); /* reasonable gap between paragraphs */
+}
+
+.section p + p {
+  margin-top: var(--space-2);
 }
 
 /* Hero */
 
 .section-hero {
-  padding-top: var(--space-16);
+  padding-block-start: var(--space-16); /* push hero down a bit more */
+  padding-block-end: var(--space-12);
 }
 
 .hero-eyebrow {
@@ -148,7 +157,7 @@ button:focus-visible {
 
 .hero-tagline {
   font-size: var(--font-size-lg);
-  color: var(--color-muted);
+  color: var(--color-text-muted);
   margin: 0 0 var(--space-4);
 }
 
@@ -179,7 +188,7 @@ button:focus-visible {
 
 .button-primary {
   background: var(--color-accent);
-  color: #050816;
+  color: #05110a;
 }
 
 .button-secondary {
@@ -239,6 +248,16 @@ button:focus-visible {
   box-shadow: 0 14px 48px rgba(0, 0, 0, 0.35);
 }
 
+.timeline-org,
+.timeline-meta,
+.timeline-highlights,
+.project-tagline,
+.project-tech,
+.learning-status,
+.contact-intro {
+  color: var(--color-text-muted);
+}
+
 @media (min-width: 768px) {
   .hero.hero--avatar,
   .hero.hero--image {
@@ -266,12 +285,14 @@ button:focus-visible {
   gap: var(--space-4);
 }
 
-.timeline-item {
+.timeline-item,
+.project-card,
+.learning-item {
   padding: var(--space-4);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
-  box-shadow: var(--shadow-soft);
   border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
 }
 
 .timeline-item-header {
@@ -294,7 +315,6 @@ button:focus-visible {
 
 .timeline-meta {
   font-size: var(--font-size-xs);
-  color: var(--color-muted);
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
@@ -476,7 +496,12 @@ button:focus-visible {
   }
 
   .section {
-    padding: var(--space-8) var(--space-4);
+    padding-block: var(--space-8);
+    padding-inline: var(--space-4);
+  }
+
+  .section p {
+    line-height: 1.6; /* increase readability on small screens */
   }
 
   .hero-title {
