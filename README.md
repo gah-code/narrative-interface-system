@@ -1,5 +1,9 @@
 
-# narrative-interface-system
+# ⚠️ Under Construction
+
+Buffering...
+
+## narrative-interface-system
 
 Narrative Interface System is the evolution of my personal landing page codebase into a reusable, section-driven foundation. It keeps the proven landing experience intact today while treating every section (hero, timeline, skills, projects, learning, contact) as a composable building block.
 
@@ -15,6 +19,8 @@ This repo is where I harden the data contracts, layout shell, and Contentful map
 
 Structure version: `v0.1.0`  
 See [`VERSION`](./VERSION) and [`CHANGELOG.md`](./CHANGELOG.md) for history.
+
+![Content Model](./contentful-content-model.png)
 
 ---
 
