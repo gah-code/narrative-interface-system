@@ -1,27 +1,26 @@
 :root {
-  /* Colors */
-  /* Base surfaces: deep greenish night */
-  --color-bg: #020a08; /* main page background */
-  --color-surface: #071510; /* cards / sections */
+  /* Colors — light, airy palette with blue accent */
+  --color-bg: #e8e6f2; /* page background */
+  --color-surface: #f7f8fc; /* cards / sections */
 
-  /* Accent greens: natural but vivid */
-  --color-accent: #43d38b; /* primary accent (buttons, highlights) */
-  --color-accent-soft: #163f2a; /* subtle accent backgrounds */
+  /* Accent blues */
+  --color-accent: #3045d8; /* primary accent (buttons, highlights) */
+  --color-accent-soft: #dfe3fb; /* subtle accent backgrounds */
 
   /* Text */
-  --color-text: #f6f8f7; /* main text, high contrast on bg */
-  --color-muted: #b7c9bd; /* soft but readable against surface */
+  --color-text: #131628; /* main text on light surfaces */
+  --color-muted: #4a4f63; /* soft supporting text */
 
   /* Borders */
-  --color-border: #245239; /* medium green border */
-  --color-border-subtle: rgba(180, 225, 198, 0.08);
+  --color-border: #c4c9d9; /* light neutral border */
+  --color-border-subtle: rgba(19, 22, 40, 0.08);
 
   /* Semantic aliases */
   --color-text-primary: var(--color-text);
   --color-text-muted: var(--color-muted);
 
   /* Focus */
-  --color-focus-ring: #6af2b5; /* lighter, eye-catching green */
+  --color-focus-ring: #7f95ff; /* high-contrast focus ring on light bg */
 
   /* (keep existing typography + spacing tokens) */
 
@@ -53,5 +52,5 @@
   --radius-pill: 999px;
 
   /* Shadow */
-  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.35);
+  --shadow-soft: 0 18px 40px rgba(19, 22, 40, 0.12);
 }
