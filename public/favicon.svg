@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Dark monogram container</title>
+  <desc id="desc">A dark, minimal rounded square with a subtle gradient border and no letterform.</desc>
+
+  <defs>
+    <linearGradient id="strokeGrad" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5a4cff"/>
+      <stop offset="1" stop-color="#2f9bd4"/>
+    </linearGradient>
+
+    <radialGradient id="bgGrad" cx="32" cy="22" r="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0e0e1a"/>
+      <stop offset="1" stop-color="#050507"/>
+    </radialGradient>
+  </defs>
+
+  <rect
+    x="6"
+    y="6"
+    width="52"
+    height="52"
+    rx="14"
+    fill="url(#bgGrad)"
+    stroke="url(#strokeGrad)"
+    stroke-width="2.25"
+  />
+</svg>
