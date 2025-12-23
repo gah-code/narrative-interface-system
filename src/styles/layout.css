@@ -511,6 +511,7 @@ button:focus-visible {
   font-weight: 600;
 }
 
+/* ✅ Pill badge: NEVER stretch */
 .skill-level {
   display: inline-flex;
   align-items: center;
@@ -524,6 +525,13 @@ button:focus-visible {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
+
+  /* key bits */
+  justify-self: start; /* ✅ grid items default to stretch — stop that */
+  width: fit-content; /* ✅ size to content */
+  max-width: 100%;
+  white-space: nowrap; /* ✅ keep STRONG/EXPERT tight */
+  flex: 0 0 auto;
 }
 
 .skill-level[data-level='working'] {
@@ -552,6 +560,10 @@ button:focus-visible {
   }
 
   .skill-level {
+    /* ✅ extra safety on small screens */
+    justify-self: start;
+    width: fit-content;
+    inline-size: max-content;
     margin-top: var(--space-1);
   }
 }
