@@ -15,10 +15,16 @@ export function SkillsSectionView({ section }: Props) {
             <ul>
               {group.skills.map((skill) => (
                 <li key={skill.id}>
-                  <span className="skill-name">{skill.name}</span>
-                  {skill.level && <span className="skill-level"> · {skill.level}</span>}
+                  <div className="skill-row">
+                    <span className="skill-name">{skill.name}</span>
+                    {skill.level && (
+                      <span className="skill-level" data-level={skill.level}>
+                        {skill.level}
+                      </span>
+                    )}
+                  </div>
                   {skill.keywords && (
-                    <span className="skill-keywords"> — {skill.keywords.join(', ')}</span>
+                    <span className="skill-keywords">{skill.keywords.join(' · ')}</span>
                   )}
                 </li>
               ))}

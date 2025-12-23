@@ -8,23 +8,25 @@ This document captures the current UI foundations, layout rules, and components 
 
 Defined in `src/styles/tokens.css`.
 
-- `--color-bg: #e8e6f2` (page background base)
-- `--color-surface: #f7f8fc` (cards and raised surfaces)
-- `--color-accent: #3045d8` (primary accent, buttons/links)
-- `--color-accent-soft: #dfe3fb` (subtle accent backgrounds)
-- `--color-text: #131628` (primary text)
-- `--color-muted: #4a4f63` (muted text)
-- `--color-border: #c4c9d9` (borders)
-- `--color-border-subtle: rgba(19, 22, 40, 0.08)` (header divider)
+- `--color-bg: #f7f3ea` (warm paper background)
+- `--color-surface: #fffdf8` (cards and raised surfaces)
+- `--color-surface-2: #f2ede2` (raised chips/badges)
+- `--color-accent: #0b2a6f` (deep navy accent)
+- `--color-accent-soft: #dde6fb` (soft accent wash)
+- `--color-text: #111827` (primary text)
+- `--color-muted: #4b5563` (muted text)
+- `--color-border: #8f887e` (higher-contrast borders)
+- `--color-border-subtle: rgba(17, 24, 39, 0.08)` (hairline dividers)
 - `--color-text-primary: var(--color-text)`
 - `--color-text-muted: var(--color-muted)`
-- `--color-focus-ring: #7f95ff` (focus outline)
+- `--color-focus-ring: #7aa2ff` (focus outline)
 
 ### 1.2 Typography tokens
 
 Defined in `src/styles/tokens.css`.
 
-- `--font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif`
+- `--font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
+- `--font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace`
 - `--font-size-xs: 0.75rem`
 - `--font-size-sm: 0.875rem`
 - `--font-size-base: 1rem`
@@ -55,18 +57,32 @@ Defined in `src/styles/tokens.css`.
 - `--radius-md: 0.5rem`
 - `--radius-lg: 1rem`
 - `--radius-pill: 999px`
-- `--shadow-soft: 0 18px 40px rgba(19, 22, 40, 0.12)`
+- `--shadow-soft: 0 18px 40px rgba(17, 24, 39, 0.1)`
+
+### 1.5 Layout density tokens
+
+Defined in `src/styles/tokens.css`.
+
+- `--content-max: 1040px` (content column width)
+- `--section-pad-y: clamp(var(--space-10), 6vw, var(--space-16))` (section vertical padding)
+- `--section-pad-x: clamp(var(--space-4), 4vw, var(--space-12))` (section horizontal padding)
+- `--stack-gap: var(--space-12)` (vertical rhythm between blocks)
+- `--heading-gap: var(--space-3)` (default gap under h3s)
+- `--heading-mb: var(--space-6)` (default gap under h2s)
+- `--lede-max: 62ch` (lede text width cap)
 
 ## 2. Global layout rules
 
 Defined in `src/styles/layout.css` and `src/index.css`.
 
- - `box-sizing: border-box` across all elements.
- - Full-height root: `html`, `body`, `#root` are 100% height.
- - Body background: `radial-gradient(ellipse at 50% -10%, rgba(92, 78, 146, 0.28) 0%, rgba(48, 69, 216, 0.14) 35%, rgba(92, 78, 146, 0.08) 55%, var(--color-bg) 78%)`.
-- Max content width: `960px` inside `.section` and `.page-header-inner`.
-- Section spacing: `.section` uses `padding-inline: var(--space-4)` and `padding-block: var(--space-12)`.
-- Section separation: `.section + .section` adds a subtle border and `margin-top: var(--space-4)`.
+- `box-sizing: border-box` across all elements.
+- Full-height root: `html`, `body`, `#root` are 100% height.
+- Body: uses `var(--font-sans)`, `line-height: 1.55`, `background: var(--color-bg)`, and `color: var(--color-text)`.
+- Headings: `h1, h2` use `line-height: 1.12` with `letter-spacing: -0.02em`; `.section h2` uses `margin-bottom: var(--heading-mb)` and `.section h3` uses `margin-bottom: var(--heading-gap)`.
+- Lede spacing: `.section h2 + p` uses `margin-bottom: var(--space-8)` and caps width at `--lede-max` with muted color.
+- Content width: `.section`, `.page-header-inner`, and `.container` are capped at `max-width: var(--content-max)` and centered with auto margins.
+- Section spacing: `.section` uses `padding: var(--section-pad-y) var(--section-pad-x)`.
+- Section separation: `.section + .section` keeps a subtle border and resets top spacing to `padding-top: var(--space-10)` (no added margin).
 
 ## 3. Accessibility and interaction
 
@@ -81,7 +97,7 @@ Defined in `src/styles/layout.css` and `src/index.css`.
 Markup is in `src/components/layout/Page.tsx`.
 
 - `.page-header` is sticky and blurred with a gradient background.
-- `.page-header-inner` aligns logo and nav, max-width 960px.
+- `.page-header-inner` aligns logo and nav, max-width `var(--content-max)`.
 - `.logo` is a 2rem circular badge.
 - `.page-nav` is a horizontal list with muted links and hover highlight.
 
@@ -102,6 +118,7 @@ Defined in `src/styles/layout.css`.
 
 Base card styles (background, border, shadow):
 
+- `.card` (utility)
 - `.timeline-card`
 - `.project-card`
 - `.learning-item`
@@ -179,8 +196,9 @@ Markup in `src/components/sections/ProjectsSection.tsx`.
 
 Markup in `src/components/sections/SkillsSection.tsx`.
 
-- `.skills-groups` grid uses `minmax(240px, 1fr)`.
-- Skill list items emphasize `.skill-name` and muted details.
+- `.skills-groups` grid uses `minmax(240px, 1fr)` with `gap: var(--space-4)`.
+- Group headings are uppercase label-style.
+- Each skill row uses `.skill-row` to align name and badge, ledger padding with dividers, and a muted keywords line.
 
 ### 4.9 Learning section
 
@@ -215,15 +233,11 @@ The landing page is defined in `src/components/layout/Page.tsx`.
 
 Defined in `src/styles/layout.css`.
 
-- `min-width: 768px`:
-  - Hero layouts become side-by-side.
-- `max-width: 960px`:
-  - Timeline stacks into a single column.
-  - Alternating order resets to default.
-- `max-width: 640px`:
-  - Header stacks vertically.
-  - Section padding reduces to `--space-8`.
-  - Hero title scales down to `--font-size-2xl`.
+- `min-width: 768px`: hero layouts become side-by-side; timeline switches to two-column with alternating order.
+- `min-width: 1024px`: timeline list and item gaps increase; media can scale larger.
+- `max-width: 640px`: header stacks vertically; section padding reduces to `--space-8` with `padding-inline: var(--space-4)`; hero title/tagline scale down (`--font-size-2xl` / `--font-size-base`).
+- `max-width: 480px`: timeline padding tightens (`padding-inline: var(--space-4)`, `padding-block: var(--space-8)`), media width tightens to ~88%.
+- `max-width: 420px`: skills badge stacks under the name inside `.skill-row`.
 
 ## 7. Content and assets
 
@@ -267,7 +281,7 @@ Anatomy
 - Media: `.hero-side` containing `.hero-avatar` or `.hero-image`
 
 Layout + Spacing
-- Section container: `.section` max width 960px, centered, `padding-inline: var(--space-4)`, `padding-block: var(--space-12)`
+- Section container: `.section` uses `padding: var(--section-pad-y) var(--section-pad-x)` with `max-width: var(--content-max)`, centered.
 - Hero layout: `.hero` is column layout with `gap: var(--space-8)`; switches to row at `min-width: 768px` with `gap: var(--space-10)`
 - Actions: `.hero-actions` uses `gap: var(--space-3)` and wraps
 
@@ -306,17 +320,17 @@ Anatomy
 - Media: `.timeline-media` containing a local SVG `<img>`
 
 Layout + Spacing
-- Section container: `.section` max width 960px, centered, `padding-inline: var(--space-4)`, `padding-block: var(--space-12)`; adjacent sections separated by top border and `margin-top: var(--space-4)` in `src/styles/layout.css`
+- Section container: `.section` uses `padding: var(--section-pad-y) var(--section-pad-x)`, `max-width: var(--content-max)`, centered; adjacent sections keep a subtle top border and add `padding-top: var(--space-10)` without margin.
 - Timeline list: `display: grid`, `gap: var(--space-10)`, list-style removed, zero padding/margin in `src/styles/layout.css`
-- Item: two-column grid with `gap: var(--space-8)` and alternating order on even items (tablet+)
-- Card: `padding: var(--space-4)` (mobile tightens to `var(--space-3)+var(--space-1)`), `border-radius: var(--radius-lg)` in `src/styles/layout.css`
+- Item: mobile-first single column with `gap: var(--space-4)`; `min-width: 768px` switches to two-column (`1.1fr / 0.9fr`) with `gap: var(--space-6)` and alternating order on even items; `min-width: 1024px` bumps list gap to `var(--space-12)` and item gap to `var(--space-8)`
+- Card: `padding: var(--space-4)` (mobile tightens to `calc(var(--space-3) + var(--space-1))`), `border-radius: var(--radius-lg)` in `src/styles/layout.css`
 - Item header: `display: flex`, `flex-wrap: wrap`, `gap: var(--space-2)`, `align-items: baseline`, `margin-bottom: var(--space-1)` in `src/styles/layout.css`
 - Meta line: `display: flex`, `flex-wrap: wrap`, `gap: var(--space-2)`, `margin-bottom: var(--space-2)` in `src/styles/layout.css`
 - Summary: `margin: 0 0 var(--space-2)` in `src/styles/layout.css`
 - Highlights list: `padding-left: 1.25rem`, `margin: 0`, `list-style: disc` in `src/styles/layout.css`
 
 Typography
-- Heading (h2): `margin: 0 0 var(--space-4)` in `.timeline h2` and `.section h2` (`src/styles/layout.css`)
+- Heading (h2): `margin: 0 0 var(--heading-mb)` in `.timeline h2` and `.section h2` (`src/styles/layout.css`)
 - Item title (h3): `font-size: var(--font-size-lg)`, `margin: 0` in `.timeline-item-header h3` (`src/styles/layout.css`)
 - Org name: `font-size: var(--font-size-sm)` in `.timeline-org` (`src/styles/layout.css`)
 - Meta line: `font-size: var(--font-size-xs)` in `.timeline-meta` (`src/styles/layout.css`)
@@ -328,14 +342,14 @@ Color + Surface
 - Muted text: `.timeline-org`, `.timeline-meta`, `.timeline-highlights` set to `color: var(--color-text-muted)` which aliases `--color-muted` in `src/styles/tokens.css`
 
 Tokens (used by timeline)
-- Colors: `--color-surface #f7f8fc`, `--color-border #c4c9d9`, `--color-text #131628`, `--color-muted #4a4f63`, `--color-text-muted → --color-muted` in `src/styles/tokens.css`
+- Colors: `--color-surface #fffdf8`, `--color-border #8f887e`, `--color-text #111827`, `--color-muted #4b5563`, `--color-text-muted → --color-muted` in `src/styles/tokens.css`
 - Typography: `--font-size-xs 0.75rem`, `--font-size-sm 0.875rem`, `--font-size-lg 1.125rem` in `src/styles/tokens.css`
 - Spacing: `--space-1 0.25rem`, `--space-2 0.5rem`, `--space-4 1rem`, `--space-12 3rem` in `src/styles/tokens.css`
-- Radius + shadow: `--radius-lg 1rem`, `--shadow-soft 0 18px 40px rgba(19, 22, 40, 0.12)` in `src/styles/tokens.css`
+- Radius + shadow: `--radius-lg 1rem`, `--shadow-soft 0 18px 40px rgba(17, 24, 39, 0.1)` in `src/styles/tokens.css`
 
 Responsive
-- Section padding: At `max-width: 640px`, `.section` uses `padding-block: var(--space-8)` in `src/styles/layout.css`; timeline sections tighten further to `padding-inline: var(--space-4)`, `padding-block: var(--space-8)` at ≤480px.
-- Timeline layout: Mobile-first single column with media first, tightened gaps, and reduced media width (~88%) at ≤480px; tablet (≥768px) restores two-column with alternating order; desktop (≥1024px) increases spacing and media size.
+- Section padding: Default clamp via tokens; at `max-width: 640px`, `.section` overrides to `padding-block: var(--space-8)` and `padding-inline: var(--space-4)`; timeline further tightens to `padding-inline: var(--space-4)`, `padding-block: var(--space-8)` at ≤480px.
+- Timeline layout: Mobile-first single column; media width tightens to ~88% at ≤480px; tablet (≥768px) switches to two-column with alternating order; desktop (≥1024px) increases list/item gaps and media size.
 
 ---
 
@@ -349,23 +363,27 @@ Anatomy
 - Section heading: `<h2>`
 - Groups container: `.skills-groups`
 - Group: `.skills-group` with `<h3>`
-- List: `.skills-group ul` with skill items
+- List: `.skills-group ul` with skill items and optional `.skill-row` wrapper
 - Labels: `.skill-name`, `.skill-level`, `.skill-keywords`
 
 Layout + Spacing
-- Groups grid: `.skills-groups` uses `grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))` with `gap: var(--space-3)`
-- Group list: `.skills-group ul` uses a simple grid with `gap: var(--space-2)`
+- Groups grid: `.skills-groups` uses `grid-template-columns: repeat(auto-fit, minmax(240px, 1fr))` with `gap: var(--space-4)`
+- Group title: `.skills-group h3` is uppercase with `letter-spacing: 0.08em`, `font-size: var(--font-size-sm)`, `color: var(--color-muted)`, `margin-bottom: var(--space-2)`
+- Group list: `.skills-group ul` is a column flex stack (no gap) that renders ledger rows
+- Row: `.skills-group ul li` uses `padding-block: var(--space-2)`, `border-bottom: 1px solid var(--color-border-subtle)`, and a small vertical gap
+- Row layout: `.skill-row` is a two-column grid (`1fr auto`) with `gap: var(--space-2)`; it stacks to a single column at `max-width: 420px`
 
 Typography
-- Group title: `.skills-group h3` uses default `h3` size with `margin-bottom: var(--space-2)`
-- Skill name: `.skill-name` uses `font-weight: 600`
-- Skill metadata: `.skill-level`, `.skill-keywords` use `--font-size-sm` and muted color
+- Skill name: `.skill-name` uses `font-weight: 600` and is the primary line
+- Skill level badge: `.skill-level` uses `--font-size-xs`, uppercase, `letter-spacing: 0.08em`, `font-weight: 700`, and pill radius
+- Keywords: `.skill-keywords` are block-level, `font-size: var(--font-size-sm)`, and rendered as a meta line joined with `" · "`
 
 Color + Surface
 - Muted text for `.skill-level` and `.skill-keywords` uses `--color-muted`
+- Badges: `.skill-level` uses `background: var(--color-surface-2)`, `border: 1px solid var(--color-border-subtle)`, `color: var(--color-text)`; level nuance via `data-level` (`working` lowers opacity, `strong` uses `--color-border`, `expert` uses `--color-accent` for the border)
 
 Responsive
-- Grid automatically stacks via `auto-fit` at smaller widths
+- Grid automatically stacks via `auto-fit`; badge and name stack inside `.skill-row` at ≤420px to prevent collisions
 
 ---
 
